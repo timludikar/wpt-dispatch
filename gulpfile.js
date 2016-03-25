@@ -2,6 +2,7 @@ var path = require('path');
 var del = require('del');
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var nodemon = require('gulp-nodemon');
 
 // set variable via $ gulp --type production
 var environment = $.util.env.type || 'development';
@@ -61,12 +62,10 @@ gulp.task('styles',function(cb) {
 
 // add livereload on the given port
 gulp.task('serve', function() {
-  $.connect.server({
-    root: dist,
-    port: port,
-    livereload: {
-      port: 35729
-    }
+  nodemon({
+    script: 'index.js',
+    ext: 'js html',
+    env: {'NODE_ENV': environment}
   });
 });
 
