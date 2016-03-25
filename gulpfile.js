@@ -28,52 +28,52 @@ var autoprefixerBrowsers = [
 
 gulp.task('scripts', function() {
   return gulp.src(webpackConfig.entry)
-    .pipe($.webpack(webpackConfig))
-    .pipe(isProduction ? $.uglify() : $.util.noop())
-    .pipe(gulp.dest(dist + 'js/'))
-    .pipe($.size({ title : 'js' }))
-    .pipe($.connect.reload());
+	.pipe($.webpack(webpackConfig))
+	.pipe(isProduction ? $.uglify() : $.util.noop())
+	.pipe(gulp.dest(dist + 'js/'))
+	.pipe($.size({ title : 'js' }))
+	.pipe($.connect.reload());
 });
 
 // copy html from app to dist
 gulp.task('html', function() {
   return gulp.src(app + 'index.html')
-    .pipe(gulp.dest(dist))
-    .pipe($.size({ title : 'html' }))
-    .pipe($.connect.reload());
+	.pipe(gulp.dest(dist))
+	.pipe($.size({ title : 'html' }))
+	.pipe($.connect.reload());
 });
 
 gulp.task('styles',function(cb) {
 
   // convert stylus to css
   return gulp.src(app + 'stylus/main.styl')
-    .pipe($.stylus({
-      // only compress if we are in production
-      compress: isProduction,
-      // include 'normal' css into main.css
-      'include css' : true
-    }))
-    .pipe($.autoprefixer({browsers: autoprefixerBrowsers})) 
-    .pipe(gulp.dest(dist + 'css/'))
-    .pipe($.size({ title : 'css' }))
-    .pipe($.connect.reload());
+	.pipe($.stylus({
+	  // only compress if we are in production
+	  compress: isProduction,
+	  // include 'normal' css into main.css
+	  'include css' : true
+	}))
+	.pipe($.autoprefixer({browsers: autoprefixerBrowsers})) 
+	.pipe(gulp.dest(dist + 'css/'))
+	.pipe($.size({ title : 'css' }))
+	.pipe($.connect.reload());
 
 });
 
 // add livereload on the given port
 gulp.task('serve', function() {
   nodemon({
-    script: 'index.js',
-    ext: 'js html',
-    env: {'NODE_ENV': environment}
+	script: 'index.js',
+	ext: 'js jsx html',
+	env: {'NODE_ENV': environment}
   });
 });
 
 // copy images
 gulp.task('images', function(cb) {
   return gulp.src(app + 'images/**/*.{png,jpg,jpeg,gif}')
-    .pipe($.size({ title : 'images' }))
-    .pipe(gulp.dest(dist + 'images/'));
+	.pipe($.size({ title : 'images' }))
+	.pipe(gulp.dest(dist + 'images/'));
 });
 
 // watch styl, html and js file changes
