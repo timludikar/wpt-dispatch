@@ -43,7 +43,9 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
+    "hapi": "^13.2.1",
     "history": "^1.13.0",
+    "inert": "^3.2.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^1.0.3",
