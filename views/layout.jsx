@@ -1,9 +1,9 @@
 "use strict";
 
-let React = require('react');
+import React from 'react';
+import Test from './title.jsx';
 
-let Default = React.createClass({
-
+export default React.createClass({
 	render: function() {
 		return(
 			<html lang="en">
@@ -16,11 +16,9 @@ let Default = React.createClass({
 				</head>
 				<body>
 					<div id="app"></div>
-					<script src="js/main.js"></script>
+					<Test />
 				</body>
 			</html>
 		);
 	}
 });
-
-export default Default;
