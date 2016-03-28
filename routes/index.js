@@ -13,7 +13,7 @@ const routes = [].concat({
 	path: '/{param*}',
 	handler: {
 		directory: {
-			path: './dist',
+			path: './app',
 			index: ['index.html']
 		}
 	}
@@ -28,6 +28,7 @@ const routes = [].concat({
 	path: '/react',
 	handler: (req, res) => {
 		req.render('layout', context, renderOpts, (err, output) => {
+			console.log(output);
 			return res(output);
 		});
 	}
