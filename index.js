@@ -3,6 +3,7 @@
 require('babel-register')();
 
 const Hapi = require('hapi');
+const routes = require('./routes').default;
 
 let server = new Hapi.Server();
 server.connection({
@@ -26,24 +27,7 @@ server.register([{
 		path: 'views'
 	});
 
-	server.route({
-		method: 'GET',
-		path: '/{param*}',
-		handler: {
-			directory: {
-				path: './dist',
-				index: ['index.html']
-			}
-		}
-	});
-
-	server.route({
-		method: 'GET',
-		path: '/',
-		handler: {
-			view: 'layout'
-		}
-	});
+	server.route(routes);
 
 	server.start(() => console.log("Server started at: " + server.info.uri));
 });
