@@ -1,5 +1,17 @@
 "use strict";
 
+let isProduction = process.env.NODE_ENV === "production";
+let staticAssets = {
+	method: 'GET',
+	path: '/assets/{param*}',
+	handler: {
+		directory: {
+			path: './build',
+			index: ['index.html']
+		}
+	}
+};
+
 let context = {};
 let renderOpts = {
 	runtimeOptions: {
@@ -8,16 +20,20 @@ let renderOpts = {
 	}
 };
 
-const routes = [].concat({
-	method: 'GET',
-	path: '/{param*}',
-	handler: {
-		directory: {
-			path: './app',
-			index: ['index.html']
+if(!isProduction) {
+	staticAssets = {
+		method: 'GET',
+		path: '/{param*}',
+		handler: {
+			proxy: {
+				host: 'localhost',
+				port: '8080'
+			}
 		}
 	}
-},{
+}
+
+const routes = [].concat(staticAssets ,{
 	method: 'GET',
 	path: '/',
 	handler: {
@@ -28,8 +44,7 @@ const routes = [].concat({
 	path: '/react',
 	handler: (req, res) => {
 		req.render('layout', context, renderOpts, (err, output) => {
-			console.log(output);
-			return res(output);
+ 			return res(output);
 		});
 	}
 });

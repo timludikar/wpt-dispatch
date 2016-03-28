@@ -15,8 +15,8 @@ export default React.createClass({
 					<title>webkid react starterkit</title>
 					<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 					<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.green-blue.min.css" />
-					<script src="http://localhost:8080/assets/bundle.js"></script>
-					<script src="vendors/script/material.js"></script>
+					<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+					<script src="/assets/bundle.js"></script>
 				</head>
 				<body>
 					<div id="app"></div>

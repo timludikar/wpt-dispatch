@@ -12,9 +12,9 @@
   ],
   "main": "index.html",
   "scripts": {
-    "start": "node server.js",
-    "build": "webpack -p --progress",
-    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon"
+    "start": "NODE_ENV=production PORT=9000 node server.js",
+    "build": "webpack -p --progress --config webpack-production.config.js",
+    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon server.js"
   },
   "author": "@moklick <mo@webkid.io>",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
     "gulp-webpack": "^1.5.0",
+    "h2o2": "^5.1.0",
     "jest-cli": "^0.7.1",
     "object-assign": "^4.0.1",
     "orchestrator": "^0.3.7",
