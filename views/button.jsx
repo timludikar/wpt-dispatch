@@ -1,6 +1,5 @@
 "use strict";
 
-
 const React = require('react');
 
 export default React.createClass({

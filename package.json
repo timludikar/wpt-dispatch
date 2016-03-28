@@ -12,8 +12,9 @@
   ],
   "main": "index.html",
   "scripts": {
-    "start": "gulp clean && gulp",
-    "test": "jest"
+    "start": "node server.js",
+    "build": "webpack -p --progress",
+    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon"
   },
   "author": "@moklick <mo@webkid.io>",
   "license": "MIT",

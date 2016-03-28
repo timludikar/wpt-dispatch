@@ -1,29 +1,29 @@
-module.exports.getConfig = function(type) {
+var path = require('path');
 
-  var isDev = type === 'development';
-
-  var config = {
-    entry: './app/scripts/main.js',
-    output: {
-      path: __dirname,
-      filename: 'main.js'
-    },
-    debug : isDev,
-    module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      }]
-    }
-  };
-
-  if(isDev){
-    config.devtool = 'eval';
-  }
-
-  return config;
+module.exports = {
+	entry: [ 
+		'webpack-dev-server/client?http://localhost:8080',
+		'webpack/hot/dev-server',
+		'./views/layout.jsx'
+	],
+	output: {
+		path: path.resolve(__dirname, 'build'),
+		filename: 'bundle.js',
+		publicPath: 'http://localhost:8080/assets/'
+	},
+	debug : true,
+	module: {
+		loaders: [{
+			test: /\.jsx?$/,
+			exclude: /node_modules/,
+			loader: 'babel',
+			query: {
+				presets: ['react', 'es2015']
+			}
+		}, {
+			test: /\.js$/,
+			loaders: ['react-hot', 'babel'],
+			include: path.join(__dirname, 'src')
+		}]
+	}
 }
