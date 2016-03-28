@@ -16,7 +16,7 @@ export default React.createClass({
 					<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 					<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.green-blue.min.css" />
 					<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-					<script src="/assets/bundle.js"></script>
+					<script src="/assets/js/bundle.js"></script>
 				</head>
 				<body>
 					<div id="app"></div>
