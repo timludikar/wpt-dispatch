@@ -1,11 +1,18 @@
 "use strict";
 
 import React from 'react';
-import Test from './title.jsx';
-import Button from './button.jsx';
+import SideBar from './sidebar.jsx';
 
 export default React.createClass({
 	render: function() {
+		let drawNav = [{
+			id: 1
+		}, {
+			id: 2
+		}, {
+			id: 3
+		}];
+
 		return(
 			<html lang="en">
 				<head>
@@ -19,9 +26,7 @@ export default React.createClass({
 					<script src="/assets/js/bundle.js"></script>
 				</head>
 				<body>
-					<div id="app"></div>
-					<Test />
-					<Button />
+					<SideBar data={drawNav}/>
 				</body>
 			</html>
 		);
