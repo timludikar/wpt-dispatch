@@ -1,19 +1,9 @@
-"use strict";
+import React, { Component } from 'react';
+import { Sidebar } from './sidebar.jsx';
 
-import React from 'react';
-import SideBar from './sidebar.jsx';
-
-export default React.createClass({
-	render: function() {
-		let drawNav = [{
-			id: 1
-		}, {
-			id: 2
-		}, {
-			id: 3
-		}];
-
-		return(
+export default class layout extends Component {
+	render() {
+		return (
 			<html lang="en">
 				<head>
 					<meta charSet="utf-8" />
@@ -26,9 +16,9 @@ export default React.createClass({
 					<script src="/assets/js/bundle.js"></script>
 				</head>
 				<body>
-					<SideBar data={drawNav}/>
+					<div id="app" />
 				</body>
 			</html>
 		);
 	}
-});
+}

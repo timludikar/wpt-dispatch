@@ -30,12 +30,12 @@
     "object-assign": "^4.0.1",
     "orchestrator": "^0.3.7",
     "react-addons-test-utils": "^0.14.2",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "babel-register": "^6.7.2",
     "hapi": "^13.2.1",
-    "hapi-react-views": "^6.0.0",
     "history": "^1.13.0",
     "immutable": "^3.7.6",
     "inert": "^3.2.0",

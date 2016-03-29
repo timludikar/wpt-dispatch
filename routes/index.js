@@ -1,6 +1,11 @@
 "use strict";
 
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import Layout from '../views/layout.jsx';
+
 const Immutable = require('immutable');
+
 let isProduction = process.env.NODE_ENV === "production";
 
 const staticAssets = () => {
@@ -42,8 +47,10 @@ let renderOpts = {
 const routes = [].concat(staticAssets() ,{
 	method: 'GET',
 	path: '/',
-	handler: {
-		view: 'layout'
+	handler: (req, res) => {
+		let layout = React.createFactory(Layout);
+		console.log(ReactDOMServer.renderToStaticMarkup(layout()))
+		return res();
 	}
 }, {
 	method: 'GET',

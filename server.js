@@ -27,14 +27,6 @@ const serverOpts = () => {
 server.register(serverOpts(), (err) => {
 	if(err) throw err;
 
-	server.views({
-		engines: {
-			jsx: require('hapi-react-views')
-		},
-		relativeTo: __dirname,
-		path: 'views'
-	});
-
 	server.route(routes);
 
 	server.start(() => console.log("Server started at: " + server.info.uri));
