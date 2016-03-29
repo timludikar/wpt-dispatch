@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Layout from '../views/layout.jsx';
+import { Layout } from '../views/layout.jsx';
 
 const Immutable = require('immutable');
 
@@ -49,8 +49,7 @@ const routes = [].concat(staticAssets() ,{
 	path: '/',
 	handler: (req, res) => {
 		let layout = React.createFactory(Layout);
-		console.log(ReactDOMServer.renderToStaticMarkup(layout()))
-		return res();
+		res.view('layout', { code: ReactDOMServer.renderToString(layout()) });
 	}
 }, {
 	method: 'GET',

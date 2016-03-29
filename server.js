@@ -27,6 +27,14 @@ const serverOpts = () => {
 server.register(serverOpts(), (err) => {
 	if(err) throw err;
 
+	server.views({
+       engines: {
+            html: require('handlebars')
+        },
+        relativeTo: __dirname,
+        path: 'templates'
+	});
+
 	server.route(routes);
 
 	server.start(() => console.log("Server started at: " + server.info.uri));
