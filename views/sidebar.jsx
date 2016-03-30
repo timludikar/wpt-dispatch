@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+export class Link extends Component {
+	render() {
+		return (
+			<a className="mdl-navigation__link" href="">{this.props.title}</a>
+		);
+	}
+}
+
 export class Sidebar extends Component {
 	render() {
 		return (
@@ -18,12 +26,11 @@ export class Sidebar extends Component {
 					</div>
 				</header>
 				<div className="mdl-layout__drawer">
-					<span className="mdl-layout-title">Title</span>
-						<nav className="mdl-navigation">
-						<a className="mdl-navigation__link" href="">Link</a>
-						<a className="mdl-navigation__link" href="">Link</a>
-						<a className="mdl-navigation__link" href="">Link</a>
-						<a className="mdl-navigation__link" href="">Link</a>
+					<span className="mdl-layout-title">{this.props.title}</span>
+					<nav className="mdl-navigation">
+						{ this.props.links.map( (link) => {
+							return <Link key={link.id} title={link.title} />
+						})}
 					</nav>
 				</div>
 				<main className="mdl-layout__content">

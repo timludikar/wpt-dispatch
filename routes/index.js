@@ -36,28 +36,22 @@ const staticAssets = () => {
 	return options.toArray();
 }
 
-let context = {};
-let renderOpts = {
-	runtimeOptions: {
-		doctype: '<!DOCTYPE html>',
-		renderMethod: 'renderToString'
-	}
-};
-
 const routes = [].concat(staticAssets() ,{
 	method: 'GET',
 	path: '/',
 	handler: (req, res) => {
+		let layoutOptions = {
+			sidebar: {
+				title: "WPT Dispatch",
+				links: [{
+					id: 1,
+					title: "Home"
+				}]
+			}
+		};
+
 		let layout = React.createFactory(Layout);
-		res.view('layout', { code: ReactDOMServer.renderToString(layout()) });
-	}
-}, {
-	method: 'GET',
-	path: '/react',
-	handler: (req, res) => {
-		req.render('layout', context, renderOpts, (err, output) => {
- 			return res(output);
-		});
+		res.view('layout', { code: ReactDOMServer.renderToString(layout(layoutOptions))});
 	}
 });
 

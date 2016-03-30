@@ -5,7 +5,7 @@ export class Layout extends Component {
 	render() {
 		return (
 			<div id="app">
-				<Sidebar />
+				<Sidebar links={this.props.sidebar.links} title={this.props.sidebar.title}/>
 			</div>
 		);
 	}
