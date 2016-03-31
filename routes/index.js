@@ -1,6 +1,13 @@
 "use strict";
 
+import React from 'react';
+import ReactDOMServer, { renderToString } from 'react-dom/server';
+import { match, RoutingContext } from 'react-router';
+
+import reactRoutes from './react-routes';
+
 const Immutable = require('immutable');
+
 let isProduction = process.env.NODE_ENV === "production";
 
 const staticAssets = () => {
@@ -18,7 +25,7 @@ const staticAssets = () => {
 	if(!isProduction){
 		return options.clear().push({
 			method: 'GET',
-			path: '/{param*}',
+			path: '/assets/{param*}',
 			handler: {
 				proxy: {
 					host: 'localhost',
@@ -31,28 +38,17 @@ const staticAssets = () => {
 	return options.toArray();
 }
 
-let context = {};
-let renderOpts = {
-	runtimeOptions: {
-		doctype: '<!DOCTYPE html>',
-		renderMethod: 'renderToString'
-	}
-};
-
-const routes = [].concat(staticAssets() ,{
-	method: 'GET',
-	path: '/',
-	handler: {
-		view: 'layout'
-	}
-}, {
-	method: 'GET',
-	path: '/react',
-	handler: (req, res) => {
-		req.render('layout', context, renderOpts, (err, output) => {
- 			return res(output);
-		});
-	}
+const routes = [].concat(staticAssets(), 
+	{
+		method: 'GET',
+		path: '/{param*}',
+		handler: (req, res) => {
+			match({ routes: reactRoutes, location: req.url.path }, (error, redirectLocation, renderProps) => {
+				if(error) res(error.message);
+				let routerContext = React.createFactory(RoutingContext);
+				res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
+			});
+	}	
 });
 
 export default routes;
