@@ -25,7 +25,7 @@ const staticAssets = () => {
 	if(!isProduction){
 		return options.clear().push({
 			method: 'GET',
-			path: '/{param*}',
+			path: '/assets/{param*}',
 			handler: {
 				proxy: {
 					host: 'localhost',
@@ -41,25 +41,7 @@ const staticAssets = () => {
 const routes = [].concat(staticAssets(), 
 	{
 		method: 'GET',
-		path: '/',
-		handler: (req, res) => {
-			let layoutOptions = {
-				sidebar: {
-					title: "WPT Dispatch",
-					links: [{
-						id: 1,
-						title: "Home"
-					}]
-				}
-			};
-
-			let layout = React.createFactory(Layout);
-			res.view('layout', { code: ReactDOMServer.renderToString(layout(layoutOptions))});
-		}
-	}, 
-	{
-		method: 'GET',
-		path: '/react/{param*}',
+		path: '/{param*}',
 		handler: (req, res) => {
 			match({ routes: reactRoutes, location: req.url.path }, (error, redirectLocation, renderProps) => {
 				if(error) res(error.message);

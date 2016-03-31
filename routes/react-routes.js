@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 
-import { Layout } from '../views/layout.jsx';
+import { App } from '../views/app.jsx';
 import { Index } from '../views/modules/index.jsx';
 import { About } from '../views/modules/about.jsx';
 
 const reactRoutes = {
-	path: '/react',
-	component: Layout,
+	path: '/',
+	component: App,
 	indexRoute: { component: Index },
 	childRoutes: [{
-		path: '/react/about',
+		path: '/about',
 		component: About
 	}]
 };

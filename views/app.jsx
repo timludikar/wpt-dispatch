@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Router, Route, Link } from 'react-router';
+import { Link } from 'react-router';
 
-export class Layout extends Component {
+export class App extends Component {
 	render() {
 		return (
 			<div>
@@ -20,9 +20,10 @@ export class Layout extends Component {
 						</div>
 					</header>
 					<div className="mdl-layout__drawer">
-						<span className="mdl-layout-title">{this.props.title}</span>
+						<span className="mdl-layout-title">WPT Dispatch</span>
 						<nav className="mdl-navigation">
-							<Link className="mdl-navigation__link" to="/react/about">About</Link>
+							<Link className="mdl-navigation__link" to="/">Home</Link>
+							<Link className="mdl-navigation__link" to="/about">About</Link>
 						</nav>
 					</div>
 					<main className="mdl-layout__content">
