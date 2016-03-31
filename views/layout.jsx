@@ -4,7 +4,7 @@ import { Router, Route, Link } from 'react-router';
 export class Layout extends Component {
 	render() {
 		return (
-			<div id="app">
+			<div>
 				<div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 					<header className="mdl-layout__header">
 						<div className="mdl-layout__header-row">

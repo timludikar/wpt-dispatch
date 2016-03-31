@@ -2,27 +2,13 @@
 
 import React from 'react';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
-import { Layout } from '../views/layout.jsx';
-import { About } from '../views/modules/about.jsx';
-import { Index } from '../views/modules/index.jsx';
+import { match, RoutingContext } from 'react-router';
 
-console.log(Index);
-
-import { match, RoutingContext } from 'react-router'
+import reactRoutes from './react-routes';
 
 const Immutable = require('immutable');
 
 let isProduction = process.env.NODE_ENV === "production";
-
-const reactroutes = {
-	path: '/react',
-	component: Layout,
-	indexRoute: { component: Index },
-	childRoutes: [{
-		path: '/react/about',
-		component: About
-	}]
-};
 
 const staticAssets = () => {
 	let options = Immutable.List.of({ 
@@ -75,7 +61,7 @@ const routes = [].concat(staticAssets(),
 		method: 'GET',
 		path: '/react/{param*}',
 		handler: (req, res) => {
-			match({ routes: reactroutes, location: req.url.path }, (error, redirectLocation, renderProps) => {
+			match({ routes: reactRoutes, location: req.url.path }, (error, redirectLocation, renderProps) => {
 				if(error) res(error.message);
 				let routerContext = React.createFactory(RoutingContext);
 				res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
