@@ -23,6 +23,7 @@ export class App extends Component {
 						<span className="mdl-layout-title">WPT Dispatch</span>
 						<nav className="mdl-navigation">
 							<Link className="mdl-navigation__link" to="/">Home</Link>
+							<Link className="mdl-navigation__link" to="/locations">Configuration</Link>
 							<Link className="mdl-navigation__link" to="/about">About</Link>
 						</nav>
 					</div>

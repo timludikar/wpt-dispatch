@@ -1,5 +1,5 @@
 import Reflux from 'reflux';
-import ItemActions from '../actions/itemActions';
+import ItemActions from '../actions/wptLocationActions';
 
 let ItemStore = Reflux.createStore({
   listenables: ItemActions,

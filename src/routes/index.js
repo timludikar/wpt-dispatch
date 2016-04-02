@@ -5,6 +5,7 @@ import ReactDOMServer, { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 
 import reactRoutes from './react-routes';
+import webpagetest from './webpagetest';
 
 import { graphql } from 'graphql';
 import { locationSchema } from '../../models/location';
@@ -41,7 +42,7 @@ const staticAssets = () => {
 	return options.toArray();
 }
 
-const routes = [].concat(staticAssets(), 
+const routes = [].concat(staticAssets(), webpagetest, 
 	{
 		method: 'GET',
 		path: '/{param*}',
@@ -66,7 +67,6 @@ const routes = [].concat(staticAssets(),
 			graphql(locationSchema, req.payload).then(result => {
 			  res(result);
 			});
-			
 		}
 	}
 );
