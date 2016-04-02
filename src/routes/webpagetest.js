@@ -1,6 +1,7 @@
 import WebPageTest from 'webpagetest';
+import {wpt} from '../../config.js';
 
-const wptPublic = new WebPageTest('www.webpagetest.org', 'API-KEY');
+const wptPublic = new WebPageTest('www.webpagetest.org', wpt.apiKey);
 
 const wptRoutes = [{
 	method: 'GET',
