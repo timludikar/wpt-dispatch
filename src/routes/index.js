@@ -6,6 +6,9 @@ import { match, RoutingContext } from 'react-router';
 
 import reactRoutes from './react-routes';
 
+import { graphql } from 'graphql';
+import { locationSchema } from '../../models/location';
+
 const Immutable = require('immutable');
 
 let isProduction = process.env.NODE_ENV === "production";
@@ -48,7 +51,28 @@ const routes = [].concat(staticAssets(),
 				let routerContext = React.createFactory(RoutingContext);
 				res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
 			});
-	}	
-});
+		}
+	},
+	{
+		method: 'GET',
+		path: '/graphql',
+		handler: (req, res) => {
+			graphql(locationSchema, "{ locations { id, browser } }").then(result => {
+			  res(result);
+			});
+			
+		}
+	},
+	{
+		method: 'POST',
+		path: '/graphql',
+		handler: (req, res) => {
+			graphql(locationSchema, "mutation {createLocation(id:\"Toronto\"){id}}").then(result => {
+			  res(result);
+			});
+			
+		}
+	}
+);
 
 export default routes;
