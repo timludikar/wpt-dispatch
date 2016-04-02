@@ -54,20 +54,16 @@ const routes = [].concat(staticAssets(),
 		}
 	},
 	{
-		method: 'GET',
-		path: '/graphql',
-		handler: (req, res) => {
-			graphql(locationSchema, "{ locations { id, browser } }").then(result => {
-			  res(result);
-			});
-			
-		}
-	},
-	{
 		method: 'POST',
 		path: '/graphql',
+		config: {
+			payload: {
+				output: 'data',
+				parse: true
+			}
+		},
 		handler: (req, res) => {
-			graphql(locationSchema, "mutation {createLocation(id:\"Toronto\"){id}}").then(result => {
+			graphql(locationSchema, req.payload).then(result => {
 			  res(result);
 			});
 			
