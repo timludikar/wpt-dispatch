@@ -6,31 +6,19 @@ import {
 	GraphQLList
 } from 'graphql';
 
-let data = [
-	{ 
-		id: "SanJose_IE9",
-		label: "San Jose, CA USA (IE 9,Chrome,Firefox)",
-		location: "SanJose_IE9",
-		browser: "IE 9"
-	},
-	{ 
-		id: "SanJose_IE9",
-		label: "San Jose, CA USA (IE 9,Chrome,Firefox)",
-		location: "SanJose_IE9"
-	}
-];
+import WebPageTest from 'webpagetest';
+import {wpt} from '../config.js';
+
+const wptPublic = new WebPageTest('www.webpagetest.org', wpt.apiKey);
 
 const Location = new GraphQLObjectType({
 	name: "Location",
 	fields: {
 		id: { type: GraphQLString },
-		label: { type: GraphQLString },
+		Label: { type: GraphQLString },
 		location: { type: GraphQLString},
-		browser: { 
-			type: GraphQLString,
-			resolve: (location) => {
-				return location.browser || "Not defined";
-			}
+		Browser: { 
+			type: GraphQLString
 		}
 	}
 });
@@ -42,7 +30,11 @@ const Query = new GraphQLObjectType({
 		locations: {
 			type: new GraphQLList(Location),
 			resolve: () => {
-				return data;
+				return new Promise(function (resolve, reject) {
+					wptPublic.getLocations((err, data) => {
+						resolve(data.response.data.location);
+					});
+				});
 			}
 		}
 	})

@@ -23,9 +23,7 @@ export class Locations extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			items : {
-				location: []
-			},
+			items : [],
 			loading: false
 		};
 	}
@@ -44,7 +42,7 @@ export class Locations extends Component {
 	}
 
 	render() {
-		let servers = this.state.items.location;
+		let servers = this.state.items;
 		return (
 			<ul className="mdl-list">
 				{	servers.map((local,i) => {

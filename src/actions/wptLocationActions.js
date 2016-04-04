@@ -7,10 +7,13 @@ const ItemActions = Reflux.createActions({
 
 ItemActions.loadItems.listen(function(){
 	let self = this;
-	fetch('/api/webpagetest/').then(res => {
+	fetch('/graphql', {
+		method: 'POST',
+		body: '{ locations { id, Label, location }}'
+	}).then(res => {
 		return res.json();
 	}).then(results => {
-		self.completed(results.response.data);
+		self.completed(results.data.locations);
 	});
 });
 
