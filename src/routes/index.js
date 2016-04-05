@@ -35,6 +35,16 @@ const staticAssets = () => {
 					port: '8080'
 				}
 			}
+		}).push({ 
+			method: 'GET',
+			path: '/graphiql/{param*}',
+			handler: {
+				directory: {
+					path: './graphiql',
+					redirectToSlash: true,
+            		index: true
+				}
+			}
 		}).toArray();
 	}
 
@@ -63,7 +73,7 @@ const routes = [].concat(staticAssets(),
 			}
 		},
 		handler: (req, res) => {
-			graphql(locationSchema, req.payload).then(result => {
+			graphql(locationSchema, req.payload.query).then(result => {
 			  res(result);
 			});
 		}
