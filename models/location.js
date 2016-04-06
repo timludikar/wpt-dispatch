@@ -8,6 +8,7 @@ import {
 
 import WebPageTest from 'webpagetest';
 import {wpt} from '../config.js';
+import { groupBy } from 'lodash';
 
 const wptPublic = new WebPageTest('www.webpagetest.org', wpt.apiKey);
 

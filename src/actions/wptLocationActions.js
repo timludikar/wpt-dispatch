@@ -7,9 +7,13 @@ const ItemActions = Reflux.createActions({
 
 ItemActions.loadItems.listen(function(){
 	let self = this;
+
+	let data = new FormData();
+	data.append("query", "{ locations { id, Label }}" );
+
 	fetch('/graphql', {
 		method: 'POST',
-		body: '{ locations { id, Label, location }}'
+		body: data
 	}).then(res => {
 		return res.json();
 	}).then(results => {
