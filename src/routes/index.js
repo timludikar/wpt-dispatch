@@ -56,10 +56,15 @@ const routes = [].concat(staticAssets(),
 		method: 'GET',
 		path: '/{param*}',
 		handler: (req, res) => {
+
+			if(req.url.pathname === "/favicon.ico"){
+				return res("Does not exist yet").code(404);
+			}
+
 			match({ routes: reactRoutes, location: req.url.path }, (error, redirectLocation, renderProps) => {
 				if(error) res(error.message);
 				let routerContext = React.createFactory(RoutingContext);
-				res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
+				return res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
 			});
 		}
 	},
@@ -74,7 +79,7 @@ const routes = [].concat(staticAssets(),
 		},
 		handler: (req, res) => {
 			graphql(locationSchema, req.payload.query).then(result => {
-			  res(result);
+			  return res(result);
 			});
 		}
 	}
