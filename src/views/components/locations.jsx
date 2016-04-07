@@ -4,17 +4,9 @@ import ItemActions from '../../actions/wptLocationActions';
 
 const LocationList = (props) => {
 	return (
-		<li className="mdl-list__item">
-			<span className="mdl-list__item-primary-content">
-				<i className="material-icons  mdl-list__item-avatar">person</i>
-				{props.Label}
-			</span>
-			<span className="mdl-list__item-secondary-action">
-			<label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor="list-checkbox-1">
-				<input type="checkbox" id="list-checkbox-1" className="mdl-checkbox__input"/>
-			</label>
-			</span>
-		</li>
+		<tr>
+			<td className="mdl-data-table__cell--non-numeric">{ props.Label }</td>
+		</tr>
 	)
 }
 
@@ -44,11 +36,24 @@ export class Locations extends Component {
 	render() {
 		let servers = this.state.items;
 		return (
-			<ul className="mdl-list">
-				{	servers.map((local,i) => {
-					return <LocationList key={i} {...local} />
-				})}
-			</ul>
+			<div className="mdl-grid">
+				<div className="mdl-layout-spacer"></div>
+				<div className="mdl-cell mdl-cell--10-col mdl-cell--middle">
+					<table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+						<thead>
+							<tr>
+								<th className="mdl-data-table__cell--non-numeric">Location</th>
+							</tr>
+						</thead>
+						<tbody>
+							{ servers.map( server => {
+								return <LocationList {...server} />;
+							}) }
+						</tbody>
+					</table>
+				</div>
+				<div className="mdl-layout-spacer"></div>
+			</div>
 		);
 	}
 }

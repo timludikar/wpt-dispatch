@@ -7,7 +7,8 @@ import { match, RoutingContext } from 'react-router';
 import reactRoutes from './react-routes';
 
 import { graphql } from 'graphql';
-import { locationSchema } from '../../models/location';
+import { locationSchema } from '../../schema/location';
+import { configSchema } from '../../schema/configuration';
 
 const Immutable = require('immutable');
 
@@ -78,7 +79,7 @@ const routes = [].concat(staticAssets(),
 			}
 		},
 		handler: (req, res) => {
-			graphql(locationSchema, req.payload.query).then(result => {
+			graphql(configSchema, req.payload.query).then(result => {
 			  return res(result);
 			});
 		}
