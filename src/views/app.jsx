@@ -27,8 +27,8 @@ export class App extends Component {
 							<Link className="mdl-navigation__link" to="/about">About</Link>
 						</nav>
 					</div>
-					<main className="mdl-layout__content">
-						<div className="page-content">{ this.props.children }</div>
+					<main className="mdl-layout__content mdl-color--grey-100">
+						{ this.props.children }
 					</main>
 				</div>
 			</div>
