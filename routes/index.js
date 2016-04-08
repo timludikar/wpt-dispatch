@@ -13,7 +13,7 @@ let isProduction = process.env.NODE_ENV === "production";
 const staticAssets = () => {
 	let options = Immutable.List.of({
 			method: 'GET',
-			path: '/assets/{param*}',
+			path: '/assets/js/{param*}',
 			handler: {
 				directory: {
 					path: './build',

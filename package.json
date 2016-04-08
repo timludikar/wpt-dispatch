@@ -1,14 +1,11 @@
 {
-  "name": "webkid-react-starterkit",
-  "version": "1.0.1",
-  "description": "Lightweight starting point for a react web app.",
+  "name": "6Bottles",
+  "version": "0.0.1",
+  "description": "Just the beginning.",
   "keywords": [
     "react",
-    "starterkit",
-    "frontend",
-    "boilerplate",
-    "reflux",
-    "react-router"
+    "react-router",
+    "webpack"
   ],
   "main": "index.html",
   "scripts": {
