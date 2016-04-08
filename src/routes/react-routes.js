@@ -2,8 +2,8 @@ import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 
 import { App } from '../views/app.jsx';
-import { Index } from '../views/components/index.jsx';
-import { About } from '../views/components/about.jsx';
+import { Index } from '../views/index.jsx';
+import { About } from '../views/about.jsx';
 
 const reactRoutes = {
 	path: '/',

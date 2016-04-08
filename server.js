@@ -3,7 +3,7 @@
 require('babel-register')();
 
 const Hapi = require('hapi');
-const routes = require('./src/routes').default;
+const routes = require('./routes').default;
 const path = require('path');
 const Immutable = require('immutable');
 

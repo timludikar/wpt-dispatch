@@ -4,14 +4,14 @@ import React from 'react';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 
-import reactRoutes from './react-routes';
+import reactRoutes from '../src/routes/react-routes';
 
 const Immutable = require('immutable');
 
 let isProduction = process.env.NODE_ENV === "production";
 
 const staticAssets = () => {
-	let options = Immutable.List.of({ 
+	let options = Immutable.List.of({
 			method: 'GET',
 			path: '/assets/{param*}',
 			handler: {
@@ -38,7 +38,7 @@ const staticAssets = () => {
 	return options.toArray();
 }
 
-const routes = [].concat(staticAssets(), 
+const routes = [].concat(staticAssets(),
 	{
 		method: 'GET',
 		path: '/{param*}',
@@ -48,7 +48,7 @@ const routes = [].concat(staticAssets(),
 				let routerContext = React.createFactory(RoutingContext);
 				res.view('layout', { code: ReactDOMServer.renderToString(routerContext(renderProps))});
 			});
-	}	
+	}
 });
 
 export default routes;
