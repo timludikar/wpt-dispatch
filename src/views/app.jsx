@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+if(process.env.BROWSER){
+		require('../less/main.less');
+}
+
 export class App extends Component {
 	render() {
 		return (

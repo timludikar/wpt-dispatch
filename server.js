@@ -3,12 +3,13 @@
 require('babel-register')();
 
 const Hapi = require('hapi');
-const routes = require('./src/routes').default;
+const routes = require('./routes').default;
 const path = require('path');
 const Immutable = require('immutable');
 
 let isProduction = process.env.NODE_ENV === "production";
 let port = isProduction ? process.env.PORT || 9000 : 9000;
+delete process.env.BROWSER;
 
 let server = new Hapi.Server();
 server.connection({

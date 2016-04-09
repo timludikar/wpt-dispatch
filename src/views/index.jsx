@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-export class About extends Component {
+export class Index extends Component {
 	render() {
 		return (
-			<div>About</div>
+			<div>Index Page!</div>
 		);
 	}
 }

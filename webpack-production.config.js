@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 
 module.exports = {
-	entry: [ 
+	entry: [
 		'./src/main.js'
 	],
 	output: {
@@ -19,6 +19,10 @@ module.exports = {
 			query: {
 				presets: ['react', 'es2015']
 			}
+		}, {
+			test: /\.less$/,
+			loader: "style-loader!css-loader!less-loader",
+			include: path.join(__dirname, 'src/less')
 		}]
 	},
 	plugins: [
@@ -30,6 +34,11 @@ module.exports = {
 		new webpack.optimize.UglifyJsPlugin({
 			compress:{
 				warnings: true
+			}
+		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				BROWSER: JSON.stringify(true)
 			}
 		})
 	]

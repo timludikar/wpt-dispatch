@@ -4,20 +4,19 @@ import React from 'react';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 
-import reactRoutes from './react-routes';
+import reactRoutes from '../src/routes/react-routes';
 
 import { graphql } from 'graphql';
-import { locationSchema } from '../../schema/location';
-import { configSchema } from '../../schema/configuration';
+import { configSchema } from '../schema/configuration';
 
 const Immutable = require('immutable');
 
 let isProduction = process.env.NODE_ENV === "production";
 
 const staticAssets = () => {
-	let options = Immutable.List.of({ 
+	let options = Immutable.List.of({
 			method: 'GET',
-			path: '/assets/{param*}',
+			path: '/assets/js/{param*}',
 			handler: {
 				directory: {
 					path: './build',
@@ -36,7 +35,7 @@ const staticAssets = () => {
 					port: '8080'
 				}
 			}
-		}).push({ 
+		}).push({
 			method: 'GET',
 			path: '/graphiql/{param*}',
 			handler: {
@@ -52,7 +51,7 @@ const staticAssets = () => {
 	return options.toArray();
 }
 
-const routes = [].concat(staticAssets(), 
+const routes = [].concat(staticAssets(),
 	{
 		method: 'GET',
 		path: '/{param*}',
