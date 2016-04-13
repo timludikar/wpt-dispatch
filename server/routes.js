@@ -7,7 +7,7 @@ import { match, RoutingContext } from 'react-router';
 import reactRoutes from '../webapp/routes/react-routes';
 
 import { graphql } from 'graphql';
-import { configSchema } from '../schema/configuration';
+import { configSchema } from '../graphql/schema/configuration';
 
 const Immutable = require('immutable');
 
@@ -19,8 +19,7 @@ const staticAssets = () => {
 			path: '/assets/js/{param*}',
 			handler: {
 				directory: {
-					path: '../public',
-					index: ['index.html']
+					path: 'public'
 				}
 			}
 		});
@@ -40,7 +39,7 @@ const staticAssets = () => {
 			path: '/graphiql/{param*}',
 			handler: {
 				directory: {
-					path: './graphiql',
+					path: 'graphiql',
 					redirectToSlash: true,
             		index: true
 				}

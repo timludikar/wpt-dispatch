@@ -17,7 +17,7 @@ server.connection({
 	port: port,
 	routes: {
 		files: {
-			relativeTo: path.join(__dirname, '../public')
+			relativeTo: path.resolve(__dirname, '../public')
 		}
 	}
 });
