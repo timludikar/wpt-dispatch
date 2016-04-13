@@ -1,7 +1,7 @@
 {
-  "name": "6Bottles",
+  "name": "WebPageTest-Dispatch",
   "version": "0.0.1",
-  "description": "Just the beginning.",
+  "description": "Test scheduler for WebPageTest",
   "keywords": [
     "react",
     "react-router",
@@ -9,11 +9,11 @@
   ],
   "main": "index.html",
   "scripts": {
-    "start": "NODE_ENV=production PORT=9000 node server.js",
+    "start": "NODE_ENV=production PORT=9000 node server/index.js",
     "build": "webpack -p --progress --config webpack-production.config.js",
-    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon server.js"
+    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon server/index.js"
   },
-  "author": "@moklick <mo@webkid.io>",
+  "author": "@timludikar <tim.ludikar@razorfish.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.4",
@@ -23,6 +23,7 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
     "del": "^2.0.2",
+    "extract-text-webpack-plugin": "^1.0.1",
     "h2o2": "^5.1.0",
     "jest-cli": "^0.7.1",
     "less": "^2.6.1",

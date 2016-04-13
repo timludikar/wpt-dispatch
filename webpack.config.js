@@ -1,24 +1,26 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	devtool: 'eval',
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/dev-server',
-		'./src/main.js'
+		'./webapp/main.js'
 	],
 	output: {
 		path: path.resolve(__dirname, 'build'),
-		filename: 'bundle.js',
-		publicPath: 'http://localhost:8080/assets/js/'
+		filename: 'js/bundle.js',
+		publicPath: 'http://localhost:8080/assets/'
 	},
 	plugins: [
 		new webpack.DefinePlugin({
 			"process.env": {
 				BROWSER: JSON.stringify(true)
 			}
-		})
+		}),
+		new ExtractTextPlugin('css/[name].css')
 	],
 	debug : true,
 	module: {
@@ -35,8 +37,8 @@ module.exports = {
 			include: path.join(__dirname, 'src')
 		}, {
 			test: /\.less$/,
-			loader: "style-loader!css-loader!less-loader",
-			include: path.join(__dirname, 'src/less')
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+			include: path.join(__dirname, 'webapp' ,'style')
 		}]
 	}
 }
