@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 
-import { App } from '../views/app.jsx';
-import { Locations } from '../views/components/locations.jsx';
-import { Index } from '../views/index.jsx';
-import { About } from '../views/about.jsx';
+import { App } from './views/app.jsx';
+import { Locations } from './views/components/locations.jsx';
+import { Index } from './views/index.jsx';
+import { About } from './views/about.jsx';
 
 const reactRoutes = {
 	path: '/',

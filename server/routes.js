@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 
-import reactRoutes from '../webapp/routes/react-routes';
+import reactRoutes from '../webapp/routes';
 
 import { graphql } from 'graphql';
 import { configSchema } from '../graphql/schema/configuration';
