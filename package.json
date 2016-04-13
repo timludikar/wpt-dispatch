@@ -1,7 +1,7 @@
 {
-  "name": "webkid-react-starterkit",
-  "version": "1.0.1",
-  "description": "Lightweight starting point for a react web app.",
+  "name": "WebPageTest-Dispatch",
+  "version": "0.0.1",
+  "description": "Test scheduler for WebPageTest",
   "keywords": [
     "react",
     "starterkit",
@@ -12,11 +12,11 @@
   ],
   "main": "index.html",
   "scripts": {
-    "start": "NODE_ENV=production PORT=9000 node server.js",
+    "start": "NODE_ENV=production PORT=9000 node server/index.js",
     "build": "webpack -p --progress --config webpack-production.config.js",
-    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon server.js"
+    "dev": "webpack-dev-server --progress --colors --hot --inline & nodemon server/index.js"
   },
-  "author": "@moklick <mo@webkid.io>",
+  "author": "@timludikar <tim.ludikar@razorfish.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.4",

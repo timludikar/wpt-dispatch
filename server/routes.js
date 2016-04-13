@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 
-import reactRoutes from '../src/routes/react-routes';
+import reactRoutes from '../webapp/routes/react-routes';
 
 const Immutable = require('immutable');
 
@@ -16,7 +16,7 @@ const staticAssets = () => {
 			path: '/assets/{param*}',
 			handler: {
 				directory: {
-					path: './build',
+					path: '../public',
 					index: ['index.html']
 				}
 			}

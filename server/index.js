@@ -13,7 +13,12 @@ let port = isProduction ? process.env.PORT || 9000 : 9000;
 let server = new Hapi.Server();
 server.connection({
 	host: 'localhost',
-	port: port
+	port: port,
+	routes: {
+		files: {
+			relativeTo: path.join(__dirname, '../public')
+		}
+	}
 });
 
 const serverOpts = () => {
@@ -31,7 +36,7 @@ server.register(serverOpts(), (err) => {
        engines: {
             html: require('handlebars')
         },
-        relativeTo: __dirname,
+        relativeTo: path.resolve(__dirname, "../webapp/"),
         path: 'templates'
 	});
 

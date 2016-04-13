@@ -3,12 +3,12 @@ var webpack = require('webpack');
 
 
 module.exports = {
-	entry: [ 
-		'./src/main.js'
+	entry: [
+		'./webapp/main.js'
 	],
 	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: 'bundle.js'
+		path: path.resolve(__dirname, 'public'),
+		filename: 'js/bundle.js'
 	},
 	devtool: 'cheap-module-source-map',
 	module: {

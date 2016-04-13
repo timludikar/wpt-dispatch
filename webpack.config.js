@@ -2,15 +2,15 @@ var path = require('path');
 
 module.exports = {
 	devtool: 'eval',
-	entry: [ 
+	entry: [
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/dev-server',
-		'./src/main.js'
+		'./webapp/main.js'
 	],
 	output: {
 		path: path.resolve(__dirname, 'build'),
-		filename: 'bundle.js',
-		publicPath: 'http://localhost:8080/assets/js/'
+		filename: 'js/bundle.js',
+		publicPath: 'http://localhost:8080/assets/'
 	},
 	debug : true,
 	module: {
