@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	devtool: 'eval',
@@ -18,7 +19,8 @@ module.exports = {
 			"process.env": {
 				BROWSER: JSON.stringify(true)
 			}
-		})
+		}),
+		new ExtractTextPlugin('css/[name].css')
 	],
 	debug : true,
 	module: {
@@ -35,8 +37,8 @@ module.exports = {
 			include: path.join(__dirname, 'src')
 		}, {
 			test: /\.less$/,
-			loader: "style-loader!css-loader!less-loader",
-			include: path.join(__dirname, 'src/less')
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+			include: path.join(__dirname, 'webapp' ,'style')
 		}]
 	}
 }

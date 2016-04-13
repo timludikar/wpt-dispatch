@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	entry: [
@@ -11,6 +11,20 @@ module.exports = {
 		filename: 'js/bundle.js'
 	},
 	devtool: 'cheap-module-source-map',
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production'),
+				BROWSER: JSON.stringify(true)
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress:{
+				warnings: true
+			}
+		}),
+		new ExtractTextPlugin('css/[name].css')
+	]
 	module: {
 		loaders: [{
 			test: /\.jsx?$/,
@@ -21,25 +35,8 @@ module.exports = {
 			}
 		}, {
 			test: /\.less$/,
-			loader: "style-loader!css-loader!less-loader",
-			include: path.join(__dirname, 'src/less')
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+			include: path.join(__dirname, 'webapp', 'style')
 		}]
-	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				'NODE_ENV': JSON.stringify('production')
-			}
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress:{
-				warnings: true
-			}
-		}),
-		new webpack.DefinePlugin({
-			"process.env": {
-				BROWSER: JSON.stringify(true)
-			}
-		})
-	]
+	}
 }
