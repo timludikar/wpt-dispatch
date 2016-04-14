@@ -9,8 +9,6 @@ class ExtendedList extends Component {
       url: ""
     };
     this._addRemoteChange = this._addRemoteChange.bind(this);
-    this._removeRemote = this._removeRemote.bind(this);
-    this._addRemote = this._addRemote.bind(this);
   }
 
   _addListFields () {
@@ -38,7 +36,7 @@ class ExtendedList extends Component {
               style={{width: '200px'}}
               />
           </ListItemContent>
-          <ListItemAction><Button onClick={this._addRemote} raised ripple>Save</Button></ListItemAction>
+          <ListItemAction><Button onClick={this.props.onItemAdd.bind(null, this.state)} raised ripple>Save</Button></ListItemAction>
           <ListItemAction><Button onClick={this.props.onItemCancel} raised ripple>Cancel</Button></ListItemAction>
         </ListItem>
       );
@@ -52,17 +50,9 @@ class ExtendedList extends Component {
     this.setState(result);
   }
 
-  _addRemote(e) {
-    this.props.onItemAdd(this.state);
-  }
-
-  _removeRemote(label) {
-    this.props.onItemRemove(label);
-  }
-
   render() {
     let items = this.props.remotes.map(remote => {
-      let editable = this.props.editable === true ? <ListItemAction><a href="#"><Icon name="remove_circle" onClick={this._removeRemote.bind(null, remote.id)} /></a></ListItemAction> : <ListItemAction />;
+      let editable = this.props.editable === true ? <ListItemAction><a href="#"><Icon name="remove_circle" onClick={this.props.onItemRemove.bind(null, remote.id)} /></a></ListItemAction> : <ListItemAction />;
 
       return (
         <ListItem twoLine key={remote.label}>

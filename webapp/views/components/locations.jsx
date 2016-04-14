@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
-import {Card, CardTitle, CardText, Icon, Button, Checkbox, Textfield, IconButton, Menu, MenuItem} from 'react-mdl';
+import { Card,
+				CardTitle,
+				CardText,
+				Icon,
+				Button,
+				Checkbox,
+				Textfield,
+				IconButton,
+				Menu,
+				MenuItem
+			} from 'react-mdl';
 import { Section } from './section.jsx';
 import ExtendedList from './extendedlist.jsx';
 import fetch from 'isomorphic-fetch';
+
+const graphql = (data) => {
+	return fetch('/graphql', {
+		method: 'POST',
+		body: data
+	});
+}
 
 export class Locations extends Component {
 	constructor(props){
@@ -24,10 +41,7 @@ export class Locations extends Component {
 		let data = new FormData();
 		data.append('query', '{locations{ id, label, url }}');
 
-		fetch('/graphql', {
-			method: 'POST',
-			body: data
-		}).then(response => response.json()).then(res => res.data).then(data => {
+		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
 			this.setState({
 				remotes: data.locations
 			});
@@ -44,10 +58,7 @@ export class Locations extends Component {
 		let data = new FormData();
 		data.append('query', 'mutation { removeHost(id: "' + e + '")}');
 
-		fetch('/graphql', {
-			method: 'POST',
-			body: data
-		}).then(response => response.json()).then(res => res.data).then(data => {
+		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
 			this.fetchRemote();
 		});
 	}
@@ -56,10 +67,7 @@ export class Locations extends Component {
 		let data = new FormData();
 		data.append('query', 'mutation { createHost(label: "' + e.label + '" url: "' + e.url + '"){ label url }}');
 
-		fetch('/graphql', {
-			method: 'POST',
-			body: data
-		}).then(response => response.json()).then(res => res.data).then(data => {
+		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
 			this.fetchRemote();
 		});
 	}
