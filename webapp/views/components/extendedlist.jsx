@@ -60,9 +60,9 @@ class ExtendedList extends Component {
     this.props.onItemRemove(label);
   }
 
-  render () {
+  render() {
     let items = this.props.remotes.map(remote => {
-      let editable = this.props.editable === true ? <ListItemAction><a href="#"><Icon name="remove_circle" onClick={this._removeRemote.bind(null, remote.label)} /></a></ListItemAction> : <ListItemAction />;
+      let editable = this.props.editable === true ? <ListItemAction><a href="#"><Icon name="remove_circle" onClick={this._removeRemote.bind(null, remote.id)} /></a></ListItemAction> : <ListItemAction />;
 
       return (
         <ListItem twoLine key={remote.label}>

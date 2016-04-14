@@ -22,7 +22,7 @@ export class Locations extends Component {
 
 	fetchRemote(){
 		let data = new FormData();
-		data.append('query', '{locations{label,url}}');
+		data.append('query', '{locations{ id, label, url }}');
 
 		fetch('/graphql', {
 			method: 'POST',
@@ -42,7 +42,7 @@ export class Locations extends Component {
 
 	itemRemove(e){
 		let data = new FormData();
-		data.append('query', 'mutation { removeHost(label: "' + e + '")}');
+		data.append('query', 'mutation { removeHost(id: "' + e + '")}');
 
 		fetch('/graphql', {
 			method: 'POST',
@@ -54,7 +54,7 @@ export class Locations extends Component {
 
 	itemAdd(e) {
 		let data = new FormData();
-		data.append('query', 'mutation { createHost(label: "' + e.label + '" url: "' + e.url + '"){ label url}}');
+		data.append('query', 'mutation { createHost(label: "' + e.label + '" url: "' + e.url + '"){ label url }}');
 
 		fetch('/graphql', {
 			method: 'POST',

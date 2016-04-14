@@ -6,7 +6,8 @@ import {
 	GraphQLInt,
 	GraphQLList,
 	GraphQLBoolean,
-	GraphQLNonNull
+	GraphQLNonNull,
+	GraphQLID
 } from 'graphql';
 
 import Host from '../models/host';
@@ -15,6 +16,7 @@ const HostObject = new GraphQLObjectType({
 	name: "Host",
 	description: "Available hosts for Webpagetest.",
 	fields: {
+		id: { type: new GraphQLNonNull(GraphQLString) },
 		label: { type: GraphQLString },
 		url: { type: GraphQLString}
 	}
@@ -70,13 +72,13 @@ const Mutation = new GraphQLObjectType({
 		removeHost: {
 			type: GraphQLBoolean,
 			args: {
-				label: { type: new GraphQLNonNull(GraphQLString) }
+				id: { type: new GraphQLNonNull(GraphQLString) }
 			},
 			resolve: (source, args) => {
 				return Host.sync().then(() => {
 					return Host.destroy({
 						where: {
-							label: args.label
+							id: args.id
 						}
 					});
 				});

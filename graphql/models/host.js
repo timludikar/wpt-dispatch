@@ -16,6 +16,11 @@ const sequelize = new Sequelize('dispatch', 'admin', 'admin', {
 });
 
 const Host = sequelize.define('host', {
+	id: {
+		primaryKey: true,
+		type: Sequelize.UUID,
+		defaultValue: Sequelize.UUIDV4
+	},
 	label: {
 		type: Sequelize.STRING
 	},
