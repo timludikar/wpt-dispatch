@@ -1,8 +1,8 @@
-import { 
-	graphql, 
-	GraphQLSchema, 
-	GraphQLObjectType, 
-	GraphQLString, 
+import {
+	graphql,
+	GraphQLSchema,
+	GraphQLObjectType,
+	GraphQLString,
 	GraphQLInt,
 	GraphQLList,
 	GraphQLBoolean,
