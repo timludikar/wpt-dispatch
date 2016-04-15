@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import RemoteApp from '../reducers/remoteReducer';
+
+let store = createStore(RemoteApp);
 
 if(process.env.BROWSER){
 		require('../style/main.less');
@@ -32,7 +37,9 @@ export class App extends Component {
 						</nav>
 					</div>
 					<main className="mdl-layout__content mdl-color--grey-100">
-						{ this.props.children }
+						<Provider store={store}>
+							{ this.props.children }
+						</Provider>
 					</main>
 				</div>
 			</div>

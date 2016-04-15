@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { List, ListItem, ListItemAction, ListItemContent, IconButton, Icon, Textfield, Button } from 'react-mdl';
+import Remote from './remote.jsx';
 
 class ExtendedList extends Component {
   constructor(props){
@@ -51,24 +52,44 @@ class ExtendedList extends Component {
   }
 
   render() {
-    let items = this.props.remotes.map(remote => {
-      let editable = this.props.editable === true ? <ListItemAction><a href="#"><Icon name="remove_circle" onClick={this.props.onItemRemove.bind(null, remote.id)} /></a></ListItemAction> : <ListItemAction />;
-
-      return (
-        <ListItem twoLine key={remote.label}>
-          <ListItemContent avatar="cloud_circle" subtitle={remote.url}>{remote.label}</ListItemContent>
-          {editable}
-        </ListItem>
-      );
-    });
-
     return (
       <List>
-          {items}
+          {this.props.remotes.map(remote => {
+              return (<Remote
+                key={remote.id}
+                remote={remote}
+                editable={this.props.editable}
+                onClick={this.props.onItemRemove}
+              />);
+          })}
           {this._addListFields()}
       </List>
     );
   }
 }
 
-export default ExtendedList;
+// export default ExtendedList;
+
+
+const RemoteList = ({ remotes, onItemAdd, onItemRemove }) => {
+  return (
+    <List>
+        {remotes.map(remote => {
+            return (<Remote
+              key={remote.id}
+              remote={remote}
+              editable={true}
+              onClick={onItemRemove}
+            />);
+        })}
+    </List>
+  );
+}
+
+RemoteList.protoTypes = {
+  remotes: PropTypes.array.isRequired,
+  onItemAdd: PropTypes.func.isRequired,
+  onItemRemove: PropTypes.func.isRequired
+}
+
+export default RemoteList

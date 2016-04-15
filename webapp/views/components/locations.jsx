@@ -14,6 +14,13 @@ import { Section } from './section.jsx';
 import ExtendedList from './extendedlist.jsx';
 import fetch from 'isomorphic-fetch';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import RemoteApp from '../../reducers/remoteReducer';
+import RemoteList from '../../containers/VisibleRemotes';
+
+
+
 const graphql = (data) => {
 	return fetch('/graphql', {
 		method: 'POST',
@@ -79,7 +86,7 @@ export class Locations extends Component {
 				<Card className="mdl-cell mdl-cell--10-col" shadow={0} style={{'width': '100%'}}>
 					<CardText style={{'width':'750px', 'margin':'auto'}}>
 						<h4>WebPageTest Hosts</h4>
-						<ExtendedList {...this.state} onItemRemove={this.itemRemove} onItemAdd={this.itemAdd} onItemCancel={this.toggleEditRemote}/>
+						<RemoteList />
 					</CardText>
 				</Card>
 				<div style={{position: 'absolute', zIndex: '99', top: '8px', right: '8px'}}>
@@ -93,6 +100,9 @@ export class Locations extends Component {
 		);
 	}
 }
+
+//						<ExtendedList {...this.state} onItemRemove={this.itemRemove} onItemAdd={this.itemAdd} onItemCancel={this.toggleEditRemote}/>
+
 
 Locations.propTypes = {
 	remotes: React.PropTypes.array
