@@ -70,12 +70,6 @@ const routes = [].concat(staticAssets(),
 	{
 		method: 'POST',
 		path: '/graphql',
-		config: {
-			payload: {
-				output: 'data',
-				parse: true
-			}
-		},
 		handler: (req, res) => {
 			graphql(configSchema, req.payload.query).then(result => {
 			  return res(result);

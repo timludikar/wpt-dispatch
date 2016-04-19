@@ -12,71 +12,25 @@ import { Card,
 			} from 'react-mdl';
 import { Section } from './section.jsx';
 import ExtendedList from './extendedlist.jsx';
-import fetch from 'isomorphic-fetch';
-
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { deleteRemote, editRemote } from '../../actions/remote';
+import { Provider, connect } from 'react-redux';
 import RemoteApp from '../../reducers/remoteReducer';
 import RemoteList from '../../containers/VisibleRemotes';
+import ServerRemotes from './remoteAdd.jsx';
 
-
-
-const graphql = (data) => {
-	return fetch('/graphql', {
-		method: 'POST',
-		body: data
-	});
-}
-
-export class Locations extends Component {
+class Locations extends Component {
 	constructor(props){
 		super(props);
-		this.state = {
-			editable: false,
-			remotes: props.remotes
-		};
 		this.toggleEditRemote = this.toggleEditRemote.bind(this);
-		this.itemAdd = this.itemAdd.bind(this);
 		this.itemRemove = this.itemRemove.bind(this);
 	}
 
-	componentDidMount() {
-		this.fetchRemote();
-	}
-
-	fetchRemote(){
-		let data = new FormData();
-		data.append('query', '{locations{ id, label, url }}');
-
-		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
-			this.setState({
-				remotes: data.locations
-			});
-		});
-	}
-
 	toggleEditRemote(e){
-		this.setState({
-			editable: !this.state.editable
-		});
+		this.props.dispatch(editRemote());
 	}
 
 	itemRemove(e){
-		let data = new FormData();
-		data.append('query', 'mutation { removeHost(id: "' + e + '")}');
-
-		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
-			this.fetchRemote();
-		});
-	}
-
-	itemAdd(e) {
-		let data = new FormData();
-		data.append('query', 'mutation { createHost(label: "' + e.label + '" url: "' + e.url + '"){ label url }}');
-
-		graphql(data).then(response => response.json()).then(res => res.data).then(data => {
-			this.fetchRemote();
-		});
+		this.props.dispatch(deleteRemote(e));
 	}
 
 	render() {
@@ -87,6 +41,7 @@ export class Locations extends Component {
 					<CardText style={{'width':'750px', 'margin':'auto'}}>
 						<h4>WebPageTest Hosts</h4>
 						<RemoteList />
+						<ServerRemotes />
 					</CardText>
 				</Card>
 				<div style={{position: 'absolute', zIndex: '99', top: '8px', right: '8px'}}>
@@ -101,13 +56,4 @@ export class Locations extends Component {
 	}
 }
 
-//						<ExtendedList {...this.state} onItemRemove={this.itemRemove} onItemAdd={this.itemAdd} onItemCancel={this.toggleEditRemote}/>
-
-
-Locations.propTypes = {
-	remotes: React.PropTypes.array
-};
-
-Locations.defaultProps = {
-	remotes: []
-};
+export default connect()(Locations);

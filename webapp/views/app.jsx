@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import RemoteApp from '../reducers/remoteReducer';
 
-let store = createStore(RemoteApp);
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+
+import RemoteApp from '../reducers/remoteReducer';
+import { fetchRemotes } from '../actions/remote';
+
+let store = createStore(RemoteApp, applyMiddleware(
+	thunkMiddleware
+));
+
+store.dispatch(fetchRemotes());
 
 if(process.env.BROWSER){
 		require('../style/main.less');
