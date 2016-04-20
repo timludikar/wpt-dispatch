@@ -10,13 +10,13 @@ import { Card,
 				Menu,
 				MenuItem
 			} from 'react-mdl';
-import { Section } from './section.jsx';
-import ExtendedList from './extendedlist.jsx';
-import { deleteRemote, editRemote } from '../../actions/remote';
+import { Section } from './components/section.jsx';
+
+import { deleteRemote, editRemote } from '../actions/remote';
 import { Provider, connect } from 'react-redux';
-import RemoteApp from '../../reducers/remoteReducer';
-import RemoteList from '../../containers/VisibleRemotes';
-import ServerRemotes from './remoteAdd.jsx';
+import RemoteApp from '../reducers/remoteReducer';
+import RemoteList from '../containers/VisibleRemotes';
+import RemoteForm from './components/remotes/remoteform.jsx';
 
 class Locations extends Component {
 	constructor(props){
@@ -39,9 +39,9 @@ class Locations extends Component {
 			<Section>
 				<Card className="mdl-cell mdl-cell--10-col" shadow={0} style={{'width': '100%'}}>
 					<CardText style={{'width':'750px', 'margin':'auto'}}>
-						<h4>WebPageTest Hosts</h4>
+						<h4>WebPageTest Remotes</h4>
 						<RemoteList />
-						<ServerRemotes />
+						<RemoteForm />
 					</CardText>
 				</Card>
 				<div style={{position: 'absolute', zIndex: '99', top: '8px', right: '8px'}}>

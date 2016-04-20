@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Provider } from 'react-redux';
+import { IconButton } from 'react-mdl';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -39,8 +40,8 @@ export class App extends Component {
 					<div className="mdl-layout__drawer">
 						<span className="mdl-layout-title">WPT Dispatch</span>
 						<nav className="mdl-navigation">
-							<Link className="mdl-navigation__link" to="/">Home</Link>
-							<Link className="mdl-navigation__link" to="/locations">Configuration</Link>
+							<Link className="mdl-navigation__link" to="/"><IconButton name='home'/>Home</Link>
+							<Link className="mdl-navigation__link" to="/settings"><IconButton name='settings'/>Settings</Link>
 							<Link className="mdl-navigation__link" to="/about">About</Link>
 						</nav>
 					</div>

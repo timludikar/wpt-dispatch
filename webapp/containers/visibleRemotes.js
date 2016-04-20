@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addRemote, removeRemote, deleteRemote } from '../actions/remote';
-import RemoteList from '../views/components/extendedlist.jsx';
+import RemoteList from '../views/components/remotes/remotelist.jsx';
 
 const mapStateToProps = (state) => {
   return {

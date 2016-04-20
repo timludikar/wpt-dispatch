@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { ListItem, ListItemContent, ListItemAction, Icon, Textfield, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { createRemote, editRemote, clearValues, updateValues } from '../../actions/remote';
+import { createRemote, editRemote, clearValues, updateValues } from '../../../actions/remote';
 
 class RemoteAdd extends React.Component {
   constructor(props){
